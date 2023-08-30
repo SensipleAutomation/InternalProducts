@@ -19,7 +19,7 @@ public class TestPart extends TestListenerAdapter {
 	public void onFinish(ITestContext context) {
 		try {
 			// Read the generated HTML report file
-			File reportFile = new File("test-output", "emailable-report.html");
+			File reportFile = new File("C:\\Users\\rajasekar.p\\eclipse-workspace\\Tryvium\\test-output\\emailable-report.html");
 			byte[] reportBytes = readBytesFromFile(reportFile);
 			String reportBase64 = Base64.getEncoder().encodeToString(reportBytes);
 

@@ -3,11 +3,15 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="org.Test.TryviumDemo">
+      <class name="org.Test.ReportTest">
         <methods>
-          <include name="Dummy"/>
+          <include name="tearDown"/>
+          <include name="setUp"/>
+          <include name="amoian"/>
+          <include name="websiteBrowser"/>
+          <include name="yourTest"/>
         </methods>
-      </class> <!-- org.Test.TryviumDemo -->
+      </class> <!-- org.Test.ReportTest -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

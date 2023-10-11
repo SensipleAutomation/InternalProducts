@@ -1,6 +1,5 @@
 package org.Test;
 
-import org.Base.BaseClass;
 import java.awt.AWTException;
 import java.awt.Robot;
 import java.awt.event.KeyEvent;
@@ -10,22 +9,22 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.NoSuchElementException;
 import java.util.Set;
 
+import org.Base.BaseClass;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.WindowType;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
+
+import io.netty.handler.timeout.TimeoutException;
 
 public class TryviumDemo extends BaseClass {
 
@@ -47,7 +46,7 @@ public class TryviumDemo extends BaseClass {
 			// Wait for password input and enter password
 			WebDriverWait passWait = new WebDriverWait(driver, Duration.ofSeconds(20));
 			WebElement Pass = passWait.until(ExpectedConditions.visibilityOfElementLocated(By.id("i0118")));
-			Pass.sendKeys("Lok64568");
+			Pass.sendKeys("Lok64569");
 
 			// Wait for sign-in button and click
 			WebElement sign = driver.findElement(By.id("idSIButton9"));
@@ -56,19 +55,19 @@ public class TryviumDemo extends BaseClass {
 			// Wait for the input button and click
 			WebDriverWait inputButtonWait = new WebDriverWait(driver, Duration.ofSeconds(20));
 			WebElement inputButton = inputButtonWait
-					.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@type='button']")));
+					.until(ExpectedConditions.elementToBeClickable(By.id("idBtn_Back")));
 			inputButton.click();
 
 			// Wait for the first app bar link button and click
-			WebDriverWait appLinkWait = new WebDriverWait(driver, Duration.ofSeconds(20));
+			WebDriverWait appLinkWait = new WebDriverWait(driver, Duration.ofSeconds(100));
 			WebElement mylink = appLinkWait.until(ExpectedConditions
 					.elementToBeClickable(By.xpath("(//button[@class='app-bar-link app-bar-button '])[2]")));
 			mylink.click();
 
 			// Wait for dismiss button and click
-			WebDriverWait dismissWait = new WebDriverWait(driver, Duration.ofSeconds(20));
+			WebDriverWait dismissWait = new WebDriverWait(driver, Duration.ofSeconds(100));
 			WebElement dismissButton = dismissWait
-					.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@title='Dismiss']")));
+					.until(ExpectedConditions.elementToBeClickable(By.xpath("(//*[@class='text'])[2]")));
 			dismissButton.click();
 
 			WebDriver newDriver = new FirefoxDriver();
@@ -86,7 +85,7 @@ public class TryviumDemo extends BaseClass {
 			// Wait for password input and enter password for the new driver
 			WebDriverWait newPassWait = new WebDriverWait(newDriver, Duration.ofSeconds(20));
 			WebElement newPass = newPassWait.until(ExpectedConditions.visibilityOfElementLocated(By.id("i0118")));
-			newPass.sendKeys("Gos85663");
+			newPass.sendKeys("Gos85664");
 
 			// Wait for sign-in button and click for the new driver
 			WebElement newSign = newDriver.findElement(By.id("idSIButton9"));
@@ -95,19 +94,19 @@ public class TryviumDemo extends BaseClass {
 			// Wait for the input button and click for the new driver
 			WebDriverWait newInputButtonWait = new WebDriverWait(newDriver, Duration.ofSeconds(20));
 			WebElement newInputButton = newInputButtonWait
-					.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@type='button']")));
+					.until(ExpectedConditions.elementToBeClickable(By.id("idBtn_Back")));
 			newInputButton.click();
 
 			// Wait for the second app bar link button and click for the new driver
-			WebDriverWait newAppLinkWait = new WebDriverWait(newDriver, Duration.ofSeconds(20));
+			WebDriverWait newAppLinkWait = new WebDriverWait(newDriver, Duration.ofSeconds(100));
 			WebElement mylink3 = newAppLinkWait.until(ExpectedConditions
 					.elementToBeClickable(By.xpath("(//button[@class='app-bar-link app-bar-button '])[2]")));
 			mylink3.click();
 
 			// Wait for dismiss button and click for the new driver
-			WebDriverWait newDismissWait = new WebDriverWait(newDriver, Duration.ofSeconds(20));
+			WebDriverWait newDismissWait = new WebDriverWait(newDriver, Duration.ofSeconds(100));
 			WebElement newDismissButton = newDismissWait
-					.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@title='Dismiss']")));
+					.until(ExpectedConditions.elementToBeClickable(By.xpath("(//*[@class='text'])[2]")));
 			newDismissButton.click();
 			Robot robot = new Robot();
 			robot.keyPress(KeyEvent.VK_ALT);
@@ -166,47 +165,48 @@ public class TryviumDemo extends BaseClass {
 					.presenceOfElementLocated(By.xpath("(//*[contains(@id, 'experience-container')])[2]")));
 
 			newDriver.switchTo().frame(chatFrameAgent);
-			Thread.sleep(10000);
 
-			WebElement chatInputFieldAgent = newDriver.findElement(By.cssSelector("div[role='textbox']"));
-			chatInputFieldAgent.sendKeys("Accept");
+			WebDriverWait acp = new WebDriverWait(newDriver, Duration.ofSeconds(30));
+			WebElement but = acp.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(
+					"//span[starts-with(text(),'Hello,you have a service request from')]/following::button[1]")));
+			but.click();
 
-			WebElement sendButtonAgent = newDriver.findElement(By.cssSelector("button[title='Send']"));
-			sendButtonAgent.click();
-
-			if (sendButtonAgent.isSelected()) {
+			if (but.isDisplayed()) {
 				System.out.println("****************Agent Accepted the invite*********************");
 			} else {
 				System.out.println("****************Agent Unable to Accept the invite*********************");
 			}
 			Thread.sleep(3000);
 			WebDriverWait wait3 = new WebDriverWait(newDriver, Duration.ofSeconds(20));
-			WebElement AgentTab = wait3.until(
-					ExpectedConditions.visibilityOfElementLocated(By.xpath("(//*[contains(text(), 'Agent Tab')])[2]")));
-			AgentTab.click();
-			if (AgentTab.isSelected()) {
+			try {
+				WebElement AgentTab = wait3.until(ExpectedConditions.visibilityOfElementLocated(
+						By.xpath("(//span[starts-with(text(),'Show Customer Profile')]/following::button[1])[2]")));
+				AgentTab.click();
 				System.out.println("****************Agent Tab Opened*********************");
-			} else {
-				System.out.println("****************Unable to click Agent Tab*********************");
+			} catch (TimeoutException e) {
+				System.out.println("****************Unable to find or click Agent Tab*********************");
 			}
 			Thread.sleep(1000);
 			newDriver.switchTo().defaultContent();
-			
-//			Thread.sleep(5000);
 
-			WebDriverWait fra = new WebDriverWait(newDriver, Duration.ofSeconds(40));
+			WebDriverWait fra = new WebDriverWait(newDriver, Duration.ofSeconds(90));
 
-			WebElement chatFra = fra.until(ExpectedConditions
-					.presenceOfElementLocated(By.xpath("//embedded-page-container[@class='extension-tab-container']")));
+			WebElement chatFra = fra.until(ExpectedConditions.presenceOfElementLocated(
+					By.xpath("//iframe[contains(@src, 'tryviumteamsqa.azurewebsites.net/agentconsole/login')]")));
 
 			newDriver.switchTo().frame(chatFra);
 
-			WebDriverWait tic = new WebDriverWait(newDriver, Duration.ofSeconds(30));
-			WebElement tik = tic.until(ExpectedConditions
-					.visibilityOfElementLocated(By.xpath("(//*[contains(@class, 'ng-star-inserted')])[6]")));
-			tik.click();
+			WebDriverWait tic = new WebDriverWait(newDriver, Duration.ofSeconds(90));
+			try {
+				WebElement tik = tic.until(ExpectedConditions
+						.visibilityOfElementLocated(By.xpath("(//*[contains(@class, 'ng-star-inserted')])[6]")));
+				tik.click();
+			} catch (Exception e) {
 
-			Thread.sleep(2000);
+				e.printStackTrace();
+			}
+
+			Thread.sleep(9000);
 
 			WebElement drop = newDriver
 					.findElement(By.xpath("(//*[contains(@class, 'ui-dropdown ui-widget ui-state-default')])[3]"));
@@ -272,8 +272,123 @@ public class TryviumDemo extends BaseClass {
 					.findElement(By.xpath("//*[contains(@class, 'btn create-ticket-btn dropdown-toggle')]"));
 			submit.click();
 
+			Thread.sleep(2000);
+
+			String windowHandle = newDriver.getWindowHandle();
+
+			WebElement create = newDriver.findElement(By.xpath("(//*[contains(@class, 'dropdown-item')])[1]"));
+			create.click();
+
+			newDriver.switchTo().defaultContent();
+
+			Thread.sleep(30000);
+
+			Set<String> windowHandles = newDriver.getWindowHandles();
+
+			List<String> list = new ArrayList<String>(windowHandles);
+
+			newDriver.switchTo().window(list.get(1));
+			Thread.sleep(2000);
+			Map<String, String> loginCredentials = new HashMap<>();
+			loginCredentials.put("username", "ApiUser");
+			loginCredentials.put("password", "ApiUser");
+			WebElement usernameField = newDriver.findElement(By.xpath("//*[@id='user_name']"));
+			WebElement passwordField = newDriver.findElement(By.xpath("//*[@id='user_password']"));
+			WebElement submitButton = newDriver.findElement(By.xpath("//*[@id='sysverb_login']"));
+			usernameField.sendKeys(loginCredentials.get("username"));
+			passwordField.sendKeys(loginCredentials.get("password"));
+			submitButton.click();
+			Thread.sleep(25000);
+			try {
+
+				for (int i = 0; i < 13; i++) {
+					robot.keyPress(KeyEvent.VK_TAB);
+					robot.keyRelease(KeyEvent.VK_TAB);
+					robot.keyPress(KeyEvent.VK_DOWN);
+					robot.keyRelease(KeyEvent.VK_DOWN);
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			Thread.sleep(2000);
+			try {
+
+				for (int i = 0; i < 18; i++) {
+					robot.keyPress(KeyEvent.VK_SHIFT);
+					robot.keyPress(KeyEvent.VK_TAB);
+					robot.keyRelease(KeyEvent.VK_TAB);
+					robot.keyRelease(KeyEvent.VK_SHIFT);
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			Thread.sleep(2000);
+			robot.keyPress(KeyEvent.VK_ENTER);
+			robot.keyRelease(KeyEvent.VK_ENTER);
+			Thread.sleep(2000);
+			newDriver.switchTo().window(list.get(0));
+			newDriver.switchTo().frame(chatFra);
+			Thread.sleep(2000);
+			WebElement ticketNumberTextBox = newDriver.findElement(By.xpath("//input[@role='searchbox']"));
+
+			WebElement destinationTextBox = newDriver.findElement(By.xpath("//input[@placeholder='Search Ticket']"));
+
+			String ticketNumber = ticketNumberTextBox.getAttribute("value");
+
+			destinationTextBox.sendKeys(ticketNumber);
+
+			Thread.sleep(3000);
+
+			newDriver.switchTo().defaultContent();
+
+			Thread.sleep(2000);
+
+			WebElement logoff = newDriver.findElement(By.xpath("//*[@source='power-bar']"));
+			logoff.click();
+			Thread.sleep(1000);
+			WebElement logoutButton = newDriver.findElement(By.id("logout-button"));
+			logoutButton.click();
+			Thread.sleep(2000);
+			WebElement confirm = newDriver.findElement(By.id("confirmButton"));
+			confirm.click();
+
+			Thread.sleep(1000);
+			try {
+
+				for (int i = 0; i < 2; i++) {
+					robot.keyPress(KeyEvent.VK_CONTROL);
+					robot.keyPress(KeyEvent.VK_W);
+					robot.keyRelease(KeyEvent.VK_W);
+					robot.keyRelease(KeyEvent.VK_CONTROL);
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			newDriver.quit();
+			Thread.sleep(1000);
+
+			WebElement end = driver.findElement(By.cssSelector("div[role='textbox']"));
+			end.sendKeys("/endchat");
+
+			WebElement fins = driver.findElement(By.cssSelector("button[title='Send']"));
+			fins.click();
+			driver.switchTo().defaultContent();
+			Thread.sleep(2000);
+
+			WebElement logoff1 = driver.findElement(By.xpath("//*[@source='power-bar']"));
+			logoff1.click();
+			Thread.sleep(1000);
+			WebElement logoutButton1 = driver.findElement(By.id("logout-button"));
+			logoutButton1.click();
+			Thread.sleep(2000);
+			WebElement confirm1 = driver.findElement(By.id("confirmButton"));
+			confirm1.click();
+			Thread.sleep(1000);
+			driver.quit();
+
 		} finally {
 			System.out.println("***************User and Agent Teams Launched successfully**************");
+
 		}
 
 	}

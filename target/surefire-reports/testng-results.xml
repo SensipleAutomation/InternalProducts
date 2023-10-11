@@ -2,16 +2,16 @@
 <testng-results skipped="0" failed="0" ignored="0" total="1" passed="1">
   <reporter-output>
   </reporter-output>
-  <suite name="Suite" duration-ms="11207" started-at="2023-08-30T15:27:37 IST" finished-at="2023-08-30T15:27:48 IST">
+  <suite name="Suite" duration-ms="49365" started-at="2023-10-11T11:47:52 IST" finished-at="2023-10-11T11:48:41 IST">
     <groups>
     </groups>
-    <test name="Test" duration-ms="11207" started-at="2023-08-30T15:27:37 IST" finished-at="2023-08-30T15:27:48 IST">
-      <class name="org.Test.moiouj">
-        <test-method status="PASS" signature="runink()[pri:0, instance:org.Test.moiouj@11438d26]" name="runink" duration-ms="11170" started-at="2023-08-30T15:27:37 IST" finished-at="2023-08-30T15:27:48 IST">
+    <test name="Test" duration-ms="49365" started-at="2023-10-11T11:47:52 IST" finished-at="2023-10-11T11:48:41 IST">
+      <class name="org.Test.Windows">
+        <test-method status="PASS" signature="ioub()[pri:0, instance:org.Test.Windows@30a3107a]" name="ioub" duration-ms="49284" started-at="2023-10-11T11:47:52 IST" finished-at="2023-10-11T11:48:41 IST">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- runink -->
-      </class> <!-- org.Test.moiouj -->
+        </test-method> <!-- ioub -->
+      </class> <!-- org.Test.Windows -->
     </test> <!-- Test -->
   </suite> <!-- Suite -->
 </testng-results>

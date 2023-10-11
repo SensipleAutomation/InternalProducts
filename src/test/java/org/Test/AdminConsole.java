@@ -70,7 +70,6 @@ public class AdminConsole extends BaseClass {
 		driver.findElement(By.xpath("(//div[@class='p-checkbox-box'])[1]")).click();
 		driver.findElement(By.xpath("(//div[@class='p-checkbox-box'])[1]")).click();
 		// Find the menu element
-
 		driver.findElement(By.xpath("(//div[@class='p-checkbox-box'])[1]")).click();
 		driver.findElement(By.xpath("(//div[@class='p-checkbox-box'])[1]")).click();
 		Thread.sleep(1000);

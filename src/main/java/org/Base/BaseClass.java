@@ -5,6 +5,7 @@ import java.awt.Robot;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
+import java.time.Duration;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -19,7 +20,9 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
@@ -53,9 +56,6 @@ public class BaseClass {
 		driver.manage().window().maximize();
 		return driver;
 	}
-	
-	
-	
 
 	public static void dashBoard() {
 		driver.manage().timeouts().implicitlyWait(java.time.Duration.ofSeconds(20));
@@ -103,9 +103,8 @@ public class BaseClass {
 		driver.get(url);
 
 	}
-	
-	
-	public static void Credentials ( ) throws InterruptedException {
+
+	public static void Credentials() throws InterruptedException {
 		Map<String, String> loginCredentials = new HashMap<>();
 		loginCredentials.put("username", "admin@sensipleucx.com");
 		loginCredentials.put("password", "Sensiple*2023");
@@ -243,11 +242,11 @@ public class BaseClass {
 	}
 
 	public static void robotClass() throws AWTException {
-		Robot rb = new Robot();
-		rb.keyPress(KeyEvent.VK_DOWN);
-		rb.keyRelease(KeyEvent.VK_DOWN);
-		rb.keyPress(KeyEvent.VK_ENTER);
-		rb.keyRelease(KeyEvent.VK_ENTER);
+		Robot robot = new Robot();
+		robot.keyPress(KeyEvent.VK_ALT);
+		robot.keyPress(KeyEvent.VK_TAB);
+		robot.keyRelease(KeyEvent.VK_TAB);
+		robot.keyRelease(KeyEvent.VK_ALT);
 
 	}
 
@@ -258,7 +257,9 @@ public class BaseClass {
 
 	public static void pageDown(WebElement element) {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
-		js.executeScript("argument[0].scrollIntoView();", element);
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+		wait.until(ExpectedConditions.visibilityOf(element));
+		js.executeScript("arguments[0].scrollIntoView();", element);
 	}
 
 	public static void frameMethod(String option, String value, WebElement element) {
